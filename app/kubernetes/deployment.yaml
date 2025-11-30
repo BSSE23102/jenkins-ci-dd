@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: static-site
+spec:
+  replicas: 3 # Run 3 instances of the application
+  selector:
+    matchLabels:
+      app: static-site
+  template:
+    metadata:
+      labels:
+        app: static-site
+    spec:
+      containers:
+        - name: static-nginx-container
+          # Use the image I pushed to the public registry
+          image: shehrozkhan624/static-site-app:v1
+          ports:
+            - containerPort: 80

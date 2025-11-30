@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  # 1. The main Static Website service (Frontend)
+  frontend:
+    build: ./app/frontend
+    container_name: static_website # Ensure this is indented two spaces from 'frontend'
+    ports:
+      - "1000:80"
+    volumes: # Ensure this is indented two spaces from 'frontend'
+      - ./app/frontend:/usr/share/nginx/html:ro
+
+  # 2. The Secondary Logger service
+  logger:
+    build: ./app/logger
+    container_name: service_logger
+    restart: always
+    environment:
+      LOG_LEVEL: INFO

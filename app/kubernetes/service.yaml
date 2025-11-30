@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  type: NodePort # Exposes the service on a port on each Node
+  selector:
+    app: static-site # Selects the Pods created by the Deployment
+  ports:
+    - protocol: TCP
+      port: 80 # Service's internal port
+      targetPort: 80 # Container port
+      nodePort: 30080 # Exposes on host port 30080 (must be 30000-32767)
